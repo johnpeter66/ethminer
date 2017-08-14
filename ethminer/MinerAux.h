@@ -883,10 +883,12 @@ private:
 
 		// this is very ugly, but if Stratum Client V2 tunrs out to be a success, V1 will be completely removed anyway
 		if (m_stratumClientVersion == 1) {
+			minelog <<"user m_user" <<m_user;
 			EthStratumClient client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
+			minelog <<"fuser m_fuser" <<m_fuser;
 			if (m_farmFailOverURL != "")
 			{
-				minelog <<"user pf" <<m_fuser;
+				
 				if (m_fuser != "")
 				{
 					client.setFailover(m_farmFailOverURL, m_fport, m_fuser, m_fpass);
