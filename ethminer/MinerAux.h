@@ -919,7 +919,8 @@ private:
 				{
 					if (client.current())
 					{
-						minelog << "Mining on vas4" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						minelog <<"user m_user" <<m_user;
+						minelog << "Mining on vas5" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else
 					{
