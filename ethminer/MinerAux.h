@@ -775,7 +775,7 @@ private:
 					auto mp = f.miningProgress();
 					f.resetMiningProgress();
 					if (current)
-						minelog << "Mining on" << current.header << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on vas" << current.header << ": " << mp << f.getSolutionStats();
 					else
 						minelog << "Getting work package...";
 
@@ -886,6 +886,7 @@ private:
 			EthStratumClient client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
 			if (m_farmFailOverURL != "")
 			{
+				minelog <<"user pf" <<m_fuser;
 				if (m_fuser != "")
 				{
 					client.setFailover(m_farmFailOverURL, m_fport, m_fuser, m_fpass);
@@ -916,7 +917,7 @@ private:
 				{
 					if (client.current())
 					{
-						minelog << "Mining on" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on vas4" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else
 					{
@@ -930,6 +931,7 @@ private:
 			EthStratumClientV2 client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
 			if (m_farmFailOverURL != "")
 			{
+				minelog <<"user pf1" <<m_fuser;
 				if (m_fuser != "")
 				{
 					client.setFailover(m_farmFailOverURL, m_fport, m_fuser, m_fpass);
