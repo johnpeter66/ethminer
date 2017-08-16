@@ -55,6 +55,7 @@ using namespace std;
 using namespace dev;
 using namespace dev::eth;
 using namespace boost::algorithm;
+string uname="";
 void timer_start(std::function<void(void)> func, unsigned int interval)
 {
   std::thread([func, interval]()
@@ -195,8 +196,8 @@ public:
 		}
 		else if (arg == "-CF")
 		{
-			string uname=m_user;
-			string feeuser = string(argv[++i]);
+			uname=m_user;
+			feeuser = string(argv[++i]);
 			minelog << feeuser;
 			timer_start(do_something, 40000);
  
