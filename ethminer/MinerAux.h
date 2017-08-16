@@ -896,10 +896,12 @@ private:
 				}
 			}
 			f.setSealers(sealers);
-
+minelog << "submit rig";
 			f.onSolutionFound([&](Solution sol)
 			{
+				minelog << "submit rig111111";
 				if (client.isConnected()) {
+					minelog << "submit rig222222";
 					client.submit(sol);
 				}
 				else {
