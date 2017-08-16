@@ -901,7 +901,7 @@ minelog << "submit rig";
 			{
 				minelog << "submit rig111111";
 				if (client.isConnected()) {
-					minelog << "submit rig222222" << sol;
+					minelog << "submit rig222222";
 					client.submit(sol);
 				}
 				else {
