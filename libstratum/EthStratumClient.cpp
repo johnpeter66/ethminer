@@ -502,14 +502,14 @@ void EthStratumClient::work_timeout_handler(const boost::system::error_code& ec)
 	}
 }
 
-bool EthStratumClient::submit(Solution solution) {
+bool EthStratumClient::submit(Solution solution,string const & uname) {
 	x_current.lock();
 	WorkPackage tempWork(m_current);
 	string temp_job = m_job;
 	WorkPackage tempPreviousWork(m_previous);
 	string temp_previous_job = m_previousJob;
 	x_current.unlock();
-
+cnote << "uname";
 	cnote << "Solution found; Submitting to" << p_active->host << "...";
 
 	string minernonce;
