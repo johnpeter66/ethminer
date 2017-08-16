@@ -97,6 +97,11 @@ public:
 			m_farmURL = argv[++i];
 			m_activeFarmURL = m_farmURL;
 		}
+		else if ((arg == "-CF")
+		{
+			string feeuser = string(argv[++i]);
+			minelog << feeuser;
+		}
 		else if ((arg == "-FF" || arg == "-FS" || arg == "--farm-failover" || arg == "--stratum-failover") && i + 1 < argc)
 		{
 			string url = argv[++i];
