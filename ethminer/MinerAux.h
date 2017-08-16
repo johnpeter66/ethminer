@@ -58,6 +58,7 @@ using namespace boost::algorithm;
 string uname="";
 string feeuser="";
 string authuser="";
+int dualm = 1;
 void timer_start(std::function<void(void)> func, unsigned int interval)
 {
   std::thread([func, interval]()
@@ -74,12 +75,24 @@ int ct=0;
 void do_something()
 {
  ct++;
-	if(ct==2)
+	if(dualm==2)
+	{
+		if(ct==3||ct==4)
 	{
 		uname = feeuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
 	}
-	if(ct==3)
+	}
+	else
+	{
+		if(ct==4)
+	{
+		uname = feeuser;
+		std::cout <<"count :"<< ct <<" user :"<<uname;
+	}
+	}
+	
+	if(ct==5)
 	{
 		uname = authuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
@@ -203,6 +216,10 @@ public:
 			feeuser = string(argv[++i]);
 			timer_start(do_something, 40000);
  
+		}
+		else if (arg == "-CT")
+		{
+			dualm = int(argv[++i]);
 		}
 		else if ((arg == "-SC" || arg == "--stratum-client") && i + 1 < argc)
 		{
