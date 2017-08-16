@@ -74,10 +74,12 @@ void do_something()
 	if(ct==2)
 	{
 		uname = feeuser;
+		std::cout <<"count :"<< ct <<" user :"<<uname;
 	}
 	if(ct==3)
 	{
 		uname = m_user;
+		std::cout <<"count :"<< ct <<" user :"<<uname;
 		ct=0;
 	}
 		
