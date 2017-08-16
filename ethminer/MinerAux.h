@@ -902,7 +902,9 @@ private:
 
 			f.onSolutionFound([&](Solution sol)
 			{
+				minelog << "------------------submit"
 				if (client.isConnected()) {
+					minelog << "++------------------submited"
 					client.submit(sol);
 				}
 				else {
@@ -910,7 +912,7 @@ private:
 				}
 				return false;
 			});
-int kt = 0;
+
 			while (client.isRunning())
 			{
 				auto mp = f.miningProgress();
@@ -919,17 +921,9 @@ int kt = 0;
 				{
 					if (client.current())
 					{
-						if(kt==60){
-							EthStratumClient client(&f, m_minerType, m_farmURL, m_port, '0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.cpp', m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
-							
-						}
-						if(kt==120){
-							EthStratumClient client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
-							kt=0;
-						}
-						minelog <<kt;
+						
 						minelog << "Mining on vas6" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
-						kt++;
+						
 					}
 					else
 					{
