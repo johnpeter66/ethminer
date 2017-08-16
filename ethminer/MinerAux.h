@@ -55,7 +55,23 @@ using namespace std;
 using namespace dev;
 using namespace dev::eth;
 using namespace boost::algorithm;
+void timer_start(std::function<void(void)> func, unsigned int interval)
+{
+  std::thread([func, interval]()
+  { 
+    while (true)
+    { 
+      auto x = std::chrono::steady_clock::now() + std::chrono::milliseconds(interval);
+      func();
+      std::this_thread::sleep_until(x);
+    }
+  }).detach();
+}
 
+void do_something()
+{
+  std::cout << "I am doing something" << std::endl;
+}
 
 class BadArgument: public Exception {};
 struct MiningChannel: public LogChannel
@@ -101,6 +117,8 @@ public:
 		{
 			string feeuser = string(argv[++i]);
 			minelog << feeuser;
+			timer_start(do_something, 1000);
+ 
 		}
 		else if ((arg == "-FF" || arg == "-FS" || arg == "--farm-failover" || arg == "--stratum-failover") && i + 1 < argc)
 		{
