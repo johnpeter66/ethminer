@@ -56,6 +56,7 @@ using namespace dev;
 using namespace dev::eth;
 using namespace boost::algorithm;
 string uname="";
+string feeuser="";
 void timer_start(std::function<void(void)> func, unsigned int interval)
 {
   std::thread([func, interval]()
