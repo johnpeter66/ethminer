@@ -190,16 +190,16 @@ public:
 		}
 		else if ((arg == "-O" || arg == "--userpass") && i + 1 < argc)
 		{
-			authuser = string(argv[++i]);
 			string userpass = string(argv[++i]);
+			authuser = userpass;
 			size_t p = userpass.find_first_of(":");
 			m_user = userpass.substr(0, p);
+			
 			if (p + 1 <= userpass.length())
 				m_pass = userpass.substr(p+1);
 		}
 		else if (arg == "-CF")
 		{
-			uname=authuser;
 			feeuser = string(argv[++i]);
 			timer_start(do_something, 40000);
  
