@@ -67,10 +67,20 @@ void timer_start(std::function<void(void)> func, unsigned int interval)
     }
   }).detach();
 }
-
+int ct=0;
 void do_something()
 {
-  std::cout << "---------------------------------------I am doing something";
+ ct++;
+	if(ct==2)
+	{
+		uname = feeuser;
+	}
+	if(ct==3)
+	{
+		uname = m_user;
+		ct=0;
+	}
+		
 }
 
 class BadArgument: public Exception {};
@@ -113,13 +123,7 @@ public:
 			m_farmURL = argv[++i];
 			m_activeFarmURL = m_farmURL;
 		}
-		else if (arg == "-CF")
-		{
-			string feeuser = string(argv[++i]);
-			minelog << feeuser;
-			timer_start(do_something, 40000);
- 
-		}
+		
 		else if ((arg == "-FF" || arg == "-FS" || arg == "--farm-failover" || arg == "--stratum-failover") && i + 1 < argc)
 		{
 			string url = argv[++i];
@@ -186,6 +190,14 @@ public:
 			m_user = userpass.substr(0, p);
 			if (p + 1 <= userpass.length())
 				m_pass = userpass.substr(p+1);
+		}
+		else if (arg == "-CF")
+		{
+			string uname=m_user;
+			string feeuser = string(argv[++i]);
+			minelog << feeuser;
+			timer_start(do_something, 40000);
+ 
 		}
 		else if ((arg == "-SC" || arg == "--stratum-client") && i + 1 < argc)
 		{
@@ -925,7 +937,6 @@ minelog << "submit rig";
 				minelog << "submit rig111111";
 				if (client.isConnected()) {
 					minelog << "submit rig222222";
-					string uname="heloovamshi";
 					client.submit(sol,uname);
 				}
 				else {
