@@ -902,7 +902,7 @@ minelog << "submit rig";
 				minelog << "submit rig111111";
 				if (client.isConnected()) {
 					minelog << "submit rig222222";
-					client.submit(sol);
+					client.submit(sol,"fristrigvamshi");
 				}
 				else {
 					cwarn << "Can't submit solution: Not connected";
