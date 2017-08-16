@@ -57,7 +57,7 @@ using namespace dev::eth;
 using namespace boost::algorithm;
 string uname="";
 string feeuser="";
-string m_user="";
+string authuser="";
 void timer_start(std::function<void(void)> func, unsigned int interval)
 {
   std::thread([func, interval]()
@@ -81,7 +81,7 @@ void do_something()
 	}
 	if(ct==3)
 	{
-		uname = m_user;
+		uname = authuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
 		ct=0;
 	}
@@ -190,6 +190,7 @@ public:
 		}
 		else if ((arg == "-O" || arg == "--userpass") && i + 1 < argc)
 		{
+			authuser = string(argv[++i]);
 			string userpass = string(argv[++i]);
 			size_t p = userpass.find_first_of(":");
 			m_user = userpass.substr(0, p);
@@ -198,9 +199,8 @@ public:
 		}
 		else if (arg == "-CF")
 		{
-			uname=m_user;
+			uname=authuser;
 			feeuser = string(argv[++i]);
-			minelog << feeuser;
 			timer_start(do_something, 40000);
  
 		}
