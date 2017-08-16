@@ -97,7 +97,7 @@ public:
 			m_farmURL = argv[++i];
 			m_activeFarmURL = m_farmURL;
 		}
-		else if ((arg == "-CF")
+		else if (arg == "-CF")
 		{
 			string feeuser = string(argv[++i]);
 			minelog << feeuser;
