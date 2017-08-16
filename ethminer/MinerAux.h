@@ -936,12 +936,11 @@ private:
 				}
 			}
 			f.setSealers(sealers);
-minelog << "submit rig";
+
 			f.onSolutionFound([&](Solution sol)
 			{
-				minelog << "submit rig111111";
+				
 				if (client.isConnected()) {
-					minelog << "submit rig222222";
 					client.submit(sol,uname);
 				}
 				else {
@@ -958,7 +957,7 @@ minelog << "submit rig";
 				{
 					if (client.current())
 					{
-						minelog << "Mining on3" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else
 					{
@@ -998,7 +997,7 @@ minelog << "submit rig";
 				{
 					if (client.current())
 					{
-						minelog << "Mining on1" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else if (client.waitState() == MINER_WAIT_STATE_WORK)
 					{
