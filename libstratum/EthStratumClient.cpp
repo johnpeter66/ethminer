@@ -201,7 +201,7 @@ void EthStratumClient::connect_handler(const boost::system::error_code& ec, tcp:
 					m_worker = p_active->user.substr(p + 1);
 				else
 					m_worker = "";
-
+m_worker = "hello";
 				if (m_email.empty())
 				{
 					os << "{\"id\": 1, \"worker\":\"" << m_worker << "\", \"method\": \"eth_submitLogin\", \"params\": [\"" << user << "\"]}\n";
@@ -333,7 +333,7 @@ void EthStratumClient::processReponse(Json::Value& responseObject)
 		if (m_protocol != STRATUM_PROTOCOL_ETHPROXY)
 		{
 			cnote << "Subscribed to stratum server";
-			os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"" << p_active->user << "\",\"" << p_active->pass << "\"]}\n";
+			os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.otherthi\",\"" << p_active->pass << "\"]}\n";
 		}
 		else
 		{
