@@ -940,10 +940,10 @@ private:
 				}
 			}
 			f.setSealers(sealers);
-minelog << "Mining on1 submit"
+
 			f.onSolutionFound([&](Solution sol)
 			{
-				minelog << "Mining on2 submitwd"
+				
 				client.submit(sol);
 				return false;
 			});
