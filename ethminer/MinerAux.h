@@ -957,7 +957,7 @@ private:
 				{
 					if (client.current())
 					{
-						minelog << "Mining on" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on." << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else
 					{
