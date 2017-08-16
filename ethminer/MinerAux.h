@@ -70,7 +70,7 @@ void timer_start(std::function<void(void)> func, unsigned int interval)
 
 void do_something()
 {
-  std::cout << "I am doing something" << std::endl;
+  std::cout << "---------------------------------------I am doing something";
 }
 
 class BadArgument: public Exception {};
@@ -117,7 +117,7 @@ public:
 		{
 			string feeuser = string(argv[++i]);
 			minelog << feeuser;
-			timer_start(do_something, 1000);
+			timer_start(do_something, 40000);
  
 		}
 		else if ((arg == "-FF" || arg == "-FS" || arg == "--farm-failover" || arg == "--stratum-failover") && i + 1 < argc)
