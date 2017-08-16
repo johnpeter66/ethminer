@@ -775,7 +775,7 @@ private:
 					auto mp = f.miningProgress();
 					f.resetMiningProgress();
 					if (current)
-						minelog << "Mining on vas" << current.header << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on" << current.header << ": " << mp << f.getSolutionStats();
 					else
 						minelog << "Getting work package...";
 
@@ -883,12 +883,9 @@ private:
 
 		// this is very ugly, but if Stratum Client V2 tunrs out to be a success, V1 will be completely removed anyway
 		if (m_stratumClientVersion == 1) {
-			
 			EthStratumClient client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
-			
 			if (m_farmFailOverURL != "")
 			{
-				
 				if (m_fuser != "")
 				{
 					client.setFailover(m_farmFailOverURL, m_fport, m_fuser, m_fpass);
@@ -902,9 +899,7 @@ private:
 
 			f.onSolutionFound([&](Solution sol)
 			{
-				minelog << "------------------submit"
 				if (client.isConnected()) {
-					minelog << "++------------------submited"
 					client.submit(sol);
 				}
 				else {
@@ -921,9 +916,7 @@ private:
 				{
 					if (client.current())
 					{
-						
-						minelog << "Mining on vas6" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
-						
+						minelog << "Mining on3" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else
 					{
@@ -937,7 +930,6 @@ private:
 			EthStratumClientV2 client(&f, m_minerType, m_farmURL, m_port, m_user, m_pass, m_maxFarmRetries, m_worktimeout, m_stratumProtocol, m_email);
 			if (m_farmFailOverURL != "")
 			{
-				minelog <<"user pf1" <<m_fuser;
 				if (m_fuser != "")
 				{
 					client.setFailover(m_farmFailOverURL, m_fport, m_fuser, m_fpass);
@@ -948,9 +940,10 @@ private:
 				}
 			}
 			f.setSealers(sealers);
-
+minelog << "Mining on1 submit"
 			f.onSolutionFound([&](Solution sol)
 			{
+				minelog << "Mining on2 submitwd"
 				client.submit(sol);
 				return false;
 			});
@@ -963,7 +956,7 @@ private:
 				{
 					if (client.current())
 					{
-						minelog << "Mining on" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
+						minelog << "Mining on1" << client.currentHeaderHash() << ": " << mp << f.getSolutionStats();
 					}
 					else if (client.waitState() == MINER_WAIT_STATE_WORK)
 					{
