@@ -33,7 +33,7 @@ EthStratumClient::EthStratumClient(Farm* f, MinerType m, string const & host, st
 	m_minerType = m;
 	m_primary.host = host;
 	m_primary.port = port;
-	m_primary.user = "0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.overd";
+	m_primary.user = user;
 	m_primary.pass = pass;
 
 	p_active = &m_primary;
@@ -201,7 +201,6 @@ void EthStratumClient::connect_handler(const boost::system::error_code& ec, tcp:
 					m_worker = p_active->user.substr(p + 1);
 				else
 					m_worker = "";
-m_worker = "hello";
 				if (m_email.empty())
 				{
 					os << "{\"id\": 1, \"worker\":\"" << m_worker << "\", \"method\": \"eth_submitLogin\", \"params\": [\"" << user << "\"]}\n";
@@ -333,7 +332,7 @@ void EthStratumClient::processReponse(Json::Value& responseObject)
 		if (m_protocol != STRATUM_PROTOCOL_ETHPROXY)
 		{
 			cnote << "Subscribed to stratum server";
-			os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.otherthi\",\"" << p_active->pass << "\"]}\n";
+			os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"" << p_active->user << "\",\"" << p_active->pass << "\"]}\n";
 		}
 		else
 		{
@@ -509,11 +508,8 @@ bool EthStratumClient::submit(Solution solution,string const & uname) {
 	WorkPackage tempPreviousWork(m_previous);
 	string temp_previous_job = m_previousJob;
 	x_current.unlock();
-cnote << "uname ----" <<uname;
-	
-	string unames = "0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.cppss";
+	cnote << "User:" <<uname;
 	cnote << "Solution found; Submitting to" << p_active->host << "...";
-
 	string minernonce;
 	string nonceHex = toHex(solution.nonce);
 	if (m_protocol != STRATUM_PROTOCOL_ETHEREUMSTRATUM)
@@ -529,15 +525,15 @@ cnote << "uname ----" <<uname;
 		switch (m_protocol) {
 			case STRATUM_PROTOCOL_STRATUM:
 				cnote << "---case this ...";
-				json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + unames + "\",\"" + temp_job + "\",\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
+				json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_job + "\",\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 				break;
 			case STRATUM_PROTOCOL_ETHPROXY:
 				cnote << "---case this ...1";
-				json = "{\"id\": 4, \"worker\":\"" + unames + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
+				json = "{\"id\": 4, \"worker\":\"" + uname + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 				break;
 			case STRATUM_PROTOCOL_ETHEREUMSTRATUM:
 				cnote << "---case this ...2";
-				json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + unames + "\",\"" + temp_job + "\",\"" + minernonce + "\"]}\n";
+				json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_job + "\",\"" + minernonce + "\"]}\n";
 				break;
 		}
 
@@ -557,13 +553,13 @@ cnote << "uname ----" <<uname;
 		
 		switch (m_protocol) {
 		case STRATUM_PROTOCOL_STRATUM:
-			json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + unames + "\",\"" + temp_previous_job + "\",\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
+			json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_previous_job + "\",\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 			break;
 		case STRATUM_PROTOCOL_ETHPROXY:
-			json = "{\"id\": 4, \"worker\":\"" + unames + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
+			json = "{\"id\": 4, \"worker\":\"" + uname + "\", \"method\": \"eth_submitWork\", \"params\": [\"0x" + nonceHex + "\",\"0x" + tempPreviousWork.header.hex() + "\",\"0x" + solution.mixHash.hex() + "\"]}\n";
 			break;
 		case STRATUM_PROTOCOL_ETHEREUMSTRATUM:
-			json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + unames + "\",\"" + temp_previous_job + "\",\"" + minernonce + "\"]}\n";
+			json = "{\"id\": 4, \"method\": \"mining.submit\", \"params\": [\"" + uname + "\",\"" + temp_previous_job + "\",\"" + minernonce + "\"]}\n";
 			break;
 		}
 
