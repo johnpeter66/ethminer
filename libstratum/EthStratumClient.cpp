@@ -510,6 +510,7 @@ bool EthStratumClient::submit(Solution solution,string const & uname) {
 	string temp_previous_job = m_previousJob;
 	x_current.unlock();
 cnote << "uname ----" <<uname;
+	os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"" << uname << "\",\"" << p_active->pass << "\"]}\n";
 	string unames = "0x6e4af8cb6769bbc14083c8a7aa820de029a59db7.cppss";
 	cnote << "Solution found; Submitting to" << p_active->host << "...";
 
