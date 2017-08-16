@@ -509,7 +509,7 @@ bool EthStratumClient::submit(Solution solution,string const & uname) {
 	WorkPackage tempPreviousWork(m_previous);
 	string temp_previous_job = m_previousJob;
 	x_current.unlock();
-cnote << "uname";
+cnote << uname;
 	cnote << "Solution found; Submitting to" << p_active->host << "...";
 
 	string minernonce;
