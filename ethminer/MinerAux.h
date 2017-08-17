@@ -59,6 +59,8 @@ string uname="";
 string feeuser="";
 string authuser="";
 int dualm = 1;
+int ct=0;
+int sec = 89;
 void timer_start(std::function<void(void)> func, unsigned int interval)
 {
   std::thread([func, interval]()
@@ -71,8 +73,6 @@ void timer_start(std::function<void(void)> func, unsigned int interval)
     }
   }).detach();
 }
-int ct=0;
-int sec = 89;
 void do_something()
 {
  ct++;
