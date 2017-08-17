@@ -784,6 +784,7 @@ private:
 
 	void doFarm(MinerType _m, string & _remote, unsigned _recheckPeriod)
 	{
+		minelog << "vovovovoovvovovovo-v-ovovo-vov-ov-ov-vo-vov-ov-  Target: ";
 		map<string, Farm::SealerDescriptor> sealers;
 #if ETH_ETHASHCL
 		sealers["opencl"] = Farm::SealerDescriptor{&CLMiner::instances, [](FarmFace& _farm, unsigned _index){ return new CLMiner(_farm, _index); }};
@@ -896,6 +897,7 @@ private:
 					m_farmRetries++;
 					if (m_farmRetries > m_maxFarmRetries)
 					{
+						minelog << "  000000===0=0=0=0=0=0=0=0=Target: ";
 						if (_remote == "exit")
 						{
 							m_running = false;
