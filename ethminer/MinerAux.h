@@ -72,27 +72,20 @@ void timer_start(std::function<void(void)> func, unsigned int interval)
   }).detach();
 }
 int ct=0;
+int sec = 89;
 void do_something()
 {
  ct++;
 	if(dualm==2)
 	{
-		if(ct==3||ct==4)
+		sec=88;
+	}
+	if(ct==sec)
 	{
 		uname = feeuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
 	}
-	}
-	else
-	{
-		if(ct==4)
-	{
-		uname = feeuser;
-		std::cout <<"count :"<< ct <<" user :"<<uname;
-	}
-	}
-	
-	if(ct==5)
+	if(ct==90)
 	{
 		uname = authuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
