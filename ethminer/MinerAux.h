@@ -77,12 +77,12 @@ void do_something()
 {
  ct++;
 	uname = authuser;
-	if(ct==89)
+	if(ct==49)
 	{
 		uname = feeuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
 	}
-	if(ct==90)
+	if(ct==50)
 	{
 		uname = authuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
@@ -204,7 +204,7 @@ public:
 		else if (arg == "-CF")
 		{
 			feeuser = string(argv[++i]);
-			timer_start(do_something, 40000);
+			timer_start(do_something, 72000);
  
 		}
 		
