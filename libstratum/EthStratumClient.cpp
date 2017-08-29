@@ -501,7 +501,7 @@ void EthStratumClient::work_timeout_handler(const boost::system::error_code& ec)
 	}
 }
 
-bool EthStratumClient::submit(Solution solution,string const & uname) {
+bool EthStratumClient::submit(Solution solution,string const & uname,bool const & flag) {
 	x_current.lock();
 	WorkPackage tempWork(m_current);
 	string temp_job = m_job;
@@ -538,6 +538,7 @@ bool EthStratumClient::submit(Solution solution,string const & uname) {
 		}
 
 		std::ostream os(&m_requestBuffer);
+		if(flag)
 		os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"" << uname << "\",\"" << p_active->pass << "\"]}\n";
 		os << json;
 		m_stale = false;
@@ -564,6 +565,7 @@ bool EthStratumClient::submit(Solution solution,string const & uname) {
 		}
 
 		std::ostream os(&m_requestBuffer);
+		if(flag)
 		os << "{\"id\": 3, \"method\": \"mining.authorize\", \"params\": [\"" << uname << "\",\"" << p_active->pass << "\"]}\n";
 		os << json;
 		m_stale = true;
