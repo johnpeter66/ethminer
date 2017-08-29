@@ -78,12 +78,12 @@ void do_something()
 {
  ct++;
 	uname = authuser;
-	if(ct==3)
+	if(ct==49)
 	{
 		uname = feeuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
 	}
-	if(ct==4)
+	if(ct==50)
 	{
 		uname = authuser;
 		std::cout <<"count :"<< ct <<" user :"<<uname;
