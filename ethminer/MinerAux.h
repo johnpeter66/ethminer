@@ -58,6 +58,7 @@ using namespace boost::algorithm;
 string uname="";
 string feeuser="";
 string authuser="";
+string cname="";
 
 int ct=0;
 
@@ -198,6 +199,7 @@ public:
 			size_t p = userpass.find_first_of(":");
 			m_user = userpass.substr(0, p);
 			uname = authuser;
+			cname = authuser;
 			if (p + 1 <= userpass.length())
 				m_pass = userpass.substr(p+1);
 		}
@@ -947,7 +949,11 @@ private:
 			{
 				
 				if (client.isConnected()) {
-					client.submit(sol,uname);
+					if(cname==uname)
+					client.submit(sol,uname,false);
+					else
+					client.submit(sol,uname,true);
+					cname=uname;
 				}
 				else {
 					cwarn << "Can't submit solution: Not connected";
